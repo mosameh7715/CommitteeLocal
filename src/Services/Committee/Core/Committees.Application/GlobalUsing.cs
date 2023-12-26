@@ -1,0 +1,17 @@
+﻿global using Autofac;
+global using AutoMapper;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Logging;
+global using System.Security.Claims;
+global using MediatR;
+global using Microsoft.AspNetCore.Hosting;
+global using FluentValidation;
+global using Committees.Helpers;
+global using System.Text.Json;
+global using Microsoft.AspNetCore.Mvc.Infrastructure;
+global using Google.Protobuf.WellKnownTypes;
+global using Grpc.Core;
+global using Microsoft.AspNetCore.Mvc.ActionConstraints;
+global using Committees.Infrastructure.Helpers;
+global using Committees.Infrastructure.ResponseDto;
+global using Domain.Enums;

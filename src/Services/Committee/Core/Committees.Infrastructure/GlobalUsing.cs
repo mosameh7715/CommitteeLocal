@@ -1,0 +1,16 @@
+﻿global using Microsoft.AspNetCore.Http;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using Committees.Infrastructure.Context;
+global using Committees.Infrastructure.GenericRepo;
+global using Committees.Infrastructure.ResponseDto;
+global using System.Linq.Expressions;
+global using System.Reflection;
+global using System.Security.Claims;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Committees.Domain.Models;
+global using Domain.Enums;
+global using Committees.Models;

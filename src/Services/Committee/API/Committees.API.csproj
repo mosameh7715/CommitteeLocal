@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5b98f6e4-17ed-43b6-8336-10a98ee541de</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Feature\**" />
+		<Compile Remove="wwwroot\uploads\ProfilePicture\**" />
+		<Content Remove="Feature\**" />
+		<Content Remove="wwwroot\uploads\ProfilePicture\**" />
+		<EmbeddedResource Remove="Feature\**" />
+		<EmbeddedResource Remove="wwwroot\uploads\ProfilePicture\**" />
+		<None Remove="Feature\**" />
+		<None Remove="wwwroot\uploads\ProfilePicture\**" />
+	</ItemGroup>
+  <ItemGroup>
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.58.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.59.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="IdentityModel" Version="6.2.0" />
+		<PackageReference Include="MediatR" Version="12.1.1" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
+
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.59.0" />
+  </ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\uploads\" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Core\Committees.Application\Committees.Application.csproj" />
+	  <ProjectReference Include="..\Core\Committees.Infrastructure\Committees.Infrastructure.csproj" />
+	</ItemGroup>
+
+</Project>
