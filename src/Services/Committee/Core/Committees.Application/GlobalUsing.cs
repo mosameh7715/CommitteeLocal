@@ -15,3 +15,27 @@ global using Microsoft.AspNetCore.Mvc.ActionConstraints;
 global using Committees.Infrastructure.Helpers;
 global using Committees.Infrastructure.ResponseDto;
 global using Domain.Enums;
+global using Committees.Domain.Models;
+global using Committees.Infrastructure.GenericRepo;
+global using Committees.Infrastructure.UnitOfWork;
+global using System.Text.RegularExpressions;
+global using Committees.Application.Features.PermissionTypes.Command.Post;
+global using Committees.Application.Validation.PermissionValidation;
+global using System.Text.Json.Serialization;
+global using Committees.Application.Helpers;
+global using Committees.Application.Features.PermissionTypes.Command.Put;
+global using Committees.Application.Features.PermissionTypes.Query.GetAll;
+global using Committees.Application.Features.OutputTypes.Command.Post;
+global using Committees.Application.Validation.OutputValidation;
+global using Committees.Application.Features.OutputTypes.Command.Put;
+global using Committees.Application.Features.OutputTypes.Query.GetAll;
+
+
+
+
+
+
+
+
+
+
