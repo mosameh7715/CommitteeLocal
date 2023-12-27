@@ -39,6 +39,8 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Protos\" />
+    <Folder Include="Services\" />
     <Folder Include="Validation\" />
   </ItemGroup>
 

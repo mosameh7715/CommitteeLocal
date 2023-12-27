@@ -4,6 +4,16 @@
     {
         public MappingProfile()
         {
+            // Permission
+            CreateMap<PostPermissionCommand, Permission>();
+            CreateMap<PutPermissionCommand, Permission>();
+            CreateMap<Permission, AllPermissionsDTO>();
+
+            // OutputType
+            CreateMap<PostOutputTypeCommand, OutputType>();
+            CreateMap<PutOutputTypeCommand, OutputType>();
+            CreateMap<OutputType, AllOutputTypesDTO>();
+        }
 			#region CommitteeApprovals
 			CreateMap<Committee, AllCommitteeApprovalDto>();
 
