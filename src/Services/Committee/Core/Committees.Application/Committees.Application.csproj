@@ -5,6 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" />
+    <None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.1.0" />
     <PackageReference Include="AutoMapper" Version="12.0.1" />
@@ -36,11 +41,17 @@
   <ItemGroup>
     <Folder Include="Protos\" />
     <Folder Include="Services\" />
+    <Folder Include="Validation\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Committees.Domain\Committees.Domain.csproj" />
     <ProjectReference Include="..\Committees.Infrastructure\Committees.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

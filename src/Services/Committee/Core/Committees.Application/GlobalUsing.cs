@@ -45,3 +45,9 @@ global using Committees.Infrastructure.Extention.IQueryable;
 
 
 
+global using Domain.Enums;
+global using Committees.Application.Features.CommitteeApprovals.Query.GetAll;
+global using Committees.Models;
+global using Committees.Infrastructure.GenericRepo;
+global using Committees.API.Protos;
+global using Microsoft.AspNetCore.Authorization;

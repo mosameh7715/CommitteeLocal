@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Committees.API.Protos";
+
+import "google/protobuf/empty.proto";
+import "Protos/CommitteeApprovals/CommitteeApprovalProtoMessages.proto";
+
+service CommitteeApprovalProtoService {
+	rpc GetAllCommitteeApprovals (RequestAllCommitteeApprovals) returns (ResponseAllCommitteeApprovals);
+}
