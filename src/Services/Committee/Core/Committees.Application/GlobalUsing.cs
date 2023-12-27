@@ -29,6 +29,14 @@ global using Committees.Application.Features.OutputTypes.Command.Post;
 global using Committees.Application.Validation.OutputValidation;
 global using Committees.Application.Features.OutputTypes.Command.Put;
 global using Committees.Application.Features.OutputTypes.Query.GetAll;
+global using Committees.Application.Features.CommitteeFeatures.Command.Post;
+global using Committees.Application.Validation.CommitteeValidation;
+global using Committees.Models;
+global using Microsoft.EntityFrameworkCore;
+global using Committees.Infrastructure.Extention.IQueryable;
+global using Committees.Application.Features.CommitteeFeatures.Command.Put;
+
+
 
 
 
