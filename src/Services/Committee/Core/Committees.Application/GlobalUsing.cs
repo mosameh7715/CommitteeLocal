@@ -15,3 +15,8 @@ global using Microsoft.AspNetCore.Mvc.ActionConstraints;
 global using Committees.Infrastructure.Helpers;
 global using Committees.Infrastructure.ResponseDto;
 global using Domain.Enums;
+global using Committees.Application.Features.CommitteeApprovals.Query.GetAll;
+global using Committees.Models;
+global using Committees.Infrastructure.GenericRepo;
+global using Committees.API.Protos;
+global using Microsoft.AspNetCore.Authorization;

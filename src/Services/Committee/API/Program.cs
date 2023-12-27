@@ -1,3 +1,5 @@
+using Committees.Application.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 try { 
@@ -101,7 +103,7 @@ builder.Services.AddControllers();
 builder.Services.AddFluentValidation();
 
 var app = builder.Build();
-//app.MapGrpcService<BlogService>();
+app.MapGrpcService<CommitteeApprovalService>();
 app.UseMiddleware<GlobalExceptionHandler>();
 // Configure the HTTP request pipeline.
 if(app.Environment.IsDevelopment())
