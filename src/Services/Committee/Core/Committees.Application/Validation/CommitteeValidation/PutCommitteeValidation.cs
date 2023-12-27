@@ -1,6 +1,4 @@
-﻿using Committees.Application.Features.CommitteeFeatures.Command.Put;
-
-namespace Committees.Application.Validation.CommitteeValidation
+﻿namespace Committees.Application.Validation.CommitteeValidation
 {
     public class PutCommitteeValidation : AbstractValidator<PutCommitteeDto>
     {
@@ -13,6 +11,10 @@ namespace Committees.Application.Validation.CommitteeValidation
             RuleFor(committee => committee.ProjectName)
                 .NotEmpty().WithMessage("ProjectName is required.")
                 .MaximumLength(255).WithMessage("ProjectName cannot exceed 255 characters.");
+
+            RuleFor(committee => committee.Description)
+                .NotEmpty().WithMessage("Description is required.")
+                .MaximumLength(1000).WithMessage("Description cannot exceed 1000 characters.");
 
             RuleFor(committee => committee.WorkRule)
                 .NotEmpty().WithMessage("WorkRule is required.")

@@ -34,6 +34,8 @@ global using Committees.Application.Validation.CommitteeValidation;
 global using Committees.Models;
 global using Microsoft.EntityFrameworkCore;
 global using Committees.Infrastructure.Extention.IQueryable;
+global using Committees.Application.Features.CommitteeFeatures.Command.Put;
+
 
 
 

@@ -5,6 +5,7 @@
         public string Name { get; set; }
         public CommitteeTime CommitteeTime { get; set; }
         public string ProjectName { get; set; }
+        public string Description { get; set; }
         public bool HasLegalDocument { get; set; }
         public string WorkRule { get; set; }
         public string? LegalDocument { get; set; }
