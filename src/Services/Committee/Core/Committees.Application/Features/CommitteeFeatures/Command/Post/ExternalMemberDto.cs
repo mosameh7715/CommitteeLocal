@@ -8,6 +8,7 @@
         public string DestinationName { get; set; }
         public string Email { get; set; }
         public Guid PermissionId { get; set; }
+        [JsonIgnore]
         public Guid CommitteeId { get; set; }
     }
 }
