@@ -1,6 +1,6 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.Post
+﻿namespace Committees.Application.Features.Committees.Commands.Put
 {
-    public class PostCommitteeCommandHandler : IRequestHandler<PostCommitteeCommand, ResponseDTO>
+    public class PutCommitteeCommandHandler : IRequestHandler<PutCommitteeCommand, ResponseDTO>
     {
         private readonly IGRepository<Committee> _committeeRepo;
         private readonly IGRepository<CommitteeAttachment> _attachmentRepo;
@@ -13,18 +13,18 @@
         private readonly ResponseDTO _responseDTO;
         private readonly IWebHostEnvironment _hosting;
         public Guid _loggedInUserId;
-        public PostCommitteeCommandHandler
+        public PutCommitteeCommandHandler
         (
-           IGRepository<CommitteeAttachment> attachmentRepo,
-           IGRepository<ExternalMember> externalMemberRepo,
-           IHttpContextAccessor _httpContextAccessor,
-           IGRepository<Committee> committeeRepo,
-           IGRepository<WorkRule> workRuleRepo,
-           IGRepository<Target> targetRepo,
-           IResponseHelper responseHelper,
-           IWebHostEnvironment hosting,
-           IUnitOfWork unitOfWork,
-           IMapper mapper
+            IGRepository<CommitteeAttachment> attachmentRepo,
+            IGRepository<ExternalMember> externalMemberRepo,
+            IHttpContextAccessor _httpContextAccessor,
+            IGRepository<Committee> committeeRepo,
+            IGRepository<WorkRule> workRuleRepo,
+            IGRepository<Target> targetRepo,
+            IResponseHelper responseHelper,
+            IWebHostEnvironment hosting,
+            IUnitOfWork unitOfWork,
+            IMapper mapper
         )
         {
             _externalMemberRepo = externalMemberRepo;
@@ -39,9 +39,10 @@
             _mapper = mapper;
             _loggedInUserId = Infrastructure.Helpers.LoggedInUserProvider.GetLoggedInUserId(_httpContextAccessor);
         }
-        public async Task<ResponseDTO> Handle(PostCommitteeCommand request, CancellationToken cancellationToken)
+
+        public async Task<ResponseDTO> Handle(PutCommitteeCommand request, CancellationToken cancellationToken)
         {
-            var validator = new PostCommitteeValidation();
+            var validator = new PutCommitteeValidation();
             var validation = validator.Validate(request.CommitteeDto);
 
             if (!validation.IsValid)
@@ -52,24 +53,31 @@
                 return _responseDTO;
             }
 
-            var newCommittee = _mapper.Map<Committee>(request.CommitteeDto);
-            _committeeRepo.Add(newCommittee);
+            var committeeToUpdate = await _committeeRepo.GetFirstAsync(x => x.Id == request.CommitteeId);
 
-            if (request.CommitteeDto.HasLegalDocument)
+            if (committeeToUpdate == null)
             {
-                newCommittee.LegalDocument = request.CommitteeDto.LegalDocument;
+                return _responseHelper.NotFound("CommitteeNotFound!");
             }
 
-            // Adding Committee Attachments
+            var mappedCommittee = _mapper.Map(request.CommitteeDto, committeeToUpdate);
+            mappedCommittee.Id = request.CommitteeId;
+            mappedCommittee.CreatedBy = committeeToUpdate.CreatedBy;
+            mappedCommittee.CreatedOn = committeeToUpdate.CreatedOn;
+            mappedCommittee.RowVersion = committeeToUpdate.RowVersion;
+            mappedCommittee.UpdatedBy = _loggedInUserId;
+
+            _committeeRepo.Update(mappedCommittee);
+
             if (request.CommitteeDto.Attachments != null)
             {
                 var attachments = await Task.WhenAll(
                     request.CommitteeDto.Attachments.Select(async att =>
                     {
-                        var file = await Upload.UploadFiles(att, _hosting, newCommittee.Id.ToString() + "CommitteeAttachments");
+                        var file = await Upload.UploadFiles(att, _hosting, committeeToUpdate.Id.ToString() + "CommitteeAttachments");
                         return new CommitteeAttachment
                         {
-                            CommitteeId = newCommittee.Id,
+                            CommitteeId = committeeToUpdate.Id,
                             Path = file,
                             CreatedBy = _loggedInUserId
                         };
@@ -78,16 +86,15 @@
                 _attachmentRepo.AddRange(attachments);
             }
 
-            // Adding Committee WorkRules Attachments
             if (request.CommitteeDto.WorkRules != null)
             {
                 var workRules = await Task.WhenAll(
                     request.CommitteeDto.WorkRules.Select(async rule =>
                     {
-                        var file = await Upload.UploadFiles(rule, _hosting, newCommittee.Id.ToString() + "CommitteeWorkRules");
+                        var file = await Upload.UploadFiles(rule, _hosting, committeeToUpdate.Id.ToString() + "CommitteeWorkRules");
                         return new WorkRule
                         {
-                            CommitteeId = newCommittee.Id,
+                            CommitteeId = committeeToUpdate.Id,
                             Path = file,
                             CreatedBy = _loggedInUserId
                         };
@@ -96,26 +103,24 @@
                 _workRuleRepo.AddRange(workRules);
             }
 
-            // Add Targets
             if (request.CommitteeDto.Targets != null)
             {
                 var targets = request.CommitteeDto.Targets.Select(targetDto =>
                 {
                     var target = _mapper.Map<Target>(targetDto);
-                    target.CommitteeId = newCommittee.Id;
+                    target.CommitteeId = committeeToUpdate.Id;
                     return target;
                 }).ToList();
 
                 _targetRepo.AddRange(targets);
             }
 
-            // Add ExternalMembers
             if (request.CommitteeDto.ExternalMembers != null)
             {
                 var externalMembers = request.CommitteeDto.ExternalMembers.Select(externalMemberDto =>
                 {
                     var externalMember = _mapper.Map<ExternalMember>(externalMemberDto);
-                    externalMember.CommitteeId = newCommittee.Id;
+                    externalMember.CommitteeId = committeeToUpdate.Id;
                     return externalMember;
                 }).ToList();
 
@@ -125,7 +130,7 @@
             _unitOfWork.SaveChanges();
             _unitOfWork.Commit();
 
-            return _responseHelper.SavedSuccessfully("CommitteeAddedSuccessfully!");
+            return _responseHelper.SavedSuccessfully("CommitteeUpdatedSuccessfully!");
         }
     }
 }

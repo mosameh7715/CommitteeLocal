@@ -1,7 +1,8 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.Post
+﻿namespace Committees.Application.Features.Committees.Queries.GetById
 {
-    public class PostCommitteeDto
+    public class CommitteeDetailsDTO
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public CommitteeTime CommitteeTime { get; set; }
         public string ProjectName { get; set; }
@@ -13,9 +14,9 @@
         public CommitteesStatus CommitteesStatus { get; set; }
         public string Location { get; set; }
         public string Position { get; set; }
-        public List<IFormFile> Attachments { get; set; }
-        public List<IFormFile> WorkRules { get; set; }
-        public List<ExternalMemberDto> ExternalMembers { get; set; }
-        public List<TargetDto> Targets { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public List<string> Attachments { get; set; }
+        public List<string> WorkRules { get; set; }
+        public List<string> Targets { get; set; }
     }
 }

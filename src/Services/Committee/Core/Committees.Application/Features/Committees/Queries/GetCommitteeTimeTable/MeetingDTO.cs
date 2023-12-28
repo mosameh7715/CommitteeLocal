@@ -1,4 +1,4 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Queries.GetCommitteeTimeTable
+﻿namespace Committees.Application.Features.Committees.Queries.GetCommitteeTimeTable
 {
     public class MeetingDTO
     {

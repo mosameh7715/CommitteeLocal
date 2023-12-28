@@ -1,4 +1,4 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.UpdateCommitteesStatus
+﻿namespace Committees.Application.Features.Committees.Commands.UpdateCommitteesStatus
 {
     public class UpdateCommitteesStatusCommand : IRequest<ResponseDTO>
     {

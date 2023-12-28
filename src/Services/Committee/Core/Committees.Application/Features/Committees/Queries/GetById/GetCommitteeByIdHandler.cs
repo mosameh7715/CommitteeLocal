@@ -1,4 +1,4 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Queries.GetById
+﻿namespace Committees.Application.Features.Committees.Queries.GetById
 {
     public class GetCommitteeByIdHandler : IRequestHandler<GetCommitteeByIdQuery, ResponseDTO>
     {

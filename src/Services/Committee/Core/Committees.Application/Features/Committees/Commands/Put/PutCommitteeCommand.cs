@@ -1,4 +1,4 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.Put
+﻿namespace Committees.Application.Features.Committees.Commands.Put
 {
     public class PutCommitteeCommand : IRequest<ResponseDTO>
     {

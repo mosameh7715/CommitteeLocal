@@ -1,4 +1,6 @@
-﻿namespace Committees.API.Controllers
+﻿using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;
+
+namespace Committees.API.Controllers
 {
     public class CommitteeController : BaseController
     {
@@ -53,6 +55,13 @@
         public Task<ResponseDTO> PostProceeding([FromForm] PostProceedingDto postProceedingDto)
         {
             return _mediator.Send(new PostProceedingCommand { ProceedingDto = postProceedingDto });
+        }
+
+        [HttpPost]
+        [Route("PostProceedingMembers")]
+        public Task<ResponseDTO> PostProceedingMembers([FromBody] PostProceedingMembersDto postProceedingMembersDto)
+        {
+            return _mediator.Send(new PostProceedingMembersCommand { MembersDto = postProceedingMembersDto });
         }
 
         [HttpPost]

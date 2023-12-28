@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Committees.Application.Features.CommitteeFeatures.Command.UpdateCommitteesStatus
+namespace Committees.Application.Features.Committees.Commands.UpdateCommitteesStatus
 {
     public class UpdateCommitteesStatusHandler : IRequestHandler<UpdateCommitteesStatusCommand, ResponseDTO>
     {

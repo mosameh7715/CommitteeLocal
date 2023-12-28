@@ -1,4 +1,10 @@
-﻿namespace Committees.Application.Mappings
+﻿using Committees.Application.Features.Committees.Commands.Post;
+using Committees.Application.Features.Committees.Commands.Put;
+using Committees.Application.Features.Committees.Queries.GetById;
+using Committees.Application.Features.Committees.Queries.GetCommitteeTimeTable;
+using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;
+
+namespace Committees.Application.Mappings
 {
     public class MappingProfile : Profile
 	{
@@ -131,13 +137,15 @@
                 .ForMember(dest => dest.Path, opt => opt.MapFrom(src => src.MeetingAttachments));
             #endregion
 
-            // OutputType
-            CreateMap<PostOutputTypeCommand, OutputType>();
-            CreateMap<PutOutputTypeCommand, OutputType>();
-            CreateMap<OutputType, AllOutputTypesDTO>();
+            #region PostProceedingMembersMapping
 
-			#region CommitteeApprovals
-			CreateMap<Committee, AllCommitteeApprovalDto>();
+            CreateMap<PostProceedingMembersDto, PostProceedingMembersCommand>()
+                .ForMember(dest => dest.ProceedingId, opt => opt.Ignore());
+
+            #endregion
+
+            #region CommitteeApprovals
+            CreateMap<Committee, AllCommitteeApprovalDto>();
 
 			CreateMap<AllCommitteeApprovalDto,AllCommitteeApprovalProto>()
 				.ForMember(dest => dest.Id,opt => opt.MapFrom(src => src.Id.ToString()))
