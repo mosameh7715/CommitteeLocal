@@ -39,3 +39,4 @@ global using Committees.Application.Features.Committees.Commands.Delete;
 global using Committees.Application.Features.Committees.Commands.Post;
 global using Committees.Application.Features.Committees.Commands.Put;
 global using Committees.Application.Features.Committees.Commands.UpdateCommitteesStatus;
+global using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;

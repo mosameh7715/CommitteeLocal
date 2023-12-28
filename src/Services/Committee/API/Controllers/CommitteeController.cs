@@ -1,6 +1,4 @@
-﻿using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;
-
-namespace Committees.API.Controllers
+﻿namespace Committees.API.Controllers
 {
     public class CommitteeController : BaseController
     {
