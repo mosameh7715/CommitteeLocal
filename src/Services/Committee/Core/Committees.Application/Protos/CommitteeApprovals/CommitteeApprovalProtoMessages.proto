@@ -12,7 +12,7 @@ message RequestAllCommitteeApprovals
 
 message ResponseAllCommitteeApprovals
 {
-	repeated CommitteeProto Committee = 1;
+	repeated AllCommitteeApprovalProto Committee = 1;
 	int32 PageIndex = 2;
 	int32 TotalPages = 3;
 	int32 TotalItems = 4;
@@ -27,59 +27,34 @@ message RequestCommitteeApprovalById
 
 message ResponseCommitteeApprovalById
 {
-	CommitteeProto Committee = 1;
-}
-
-
-//GET CONTROLLER AND ACTION NAMES
-message GetCommitteeApprovalControllerAndActionNameResponse{
-	repeated CommitteeApprovalModuleInfo ModuleInfo =1;
-}
-
-message CommitteeApprovalModuleInfo {
-	string MethodVerd =1;
-    string Path =2;
-    string ControllerName =3;
-    string ActionName =4;
-    int64 key =5;
+	CommitteeApprovalProtoById Committee = 1;
 }
 
 /*PROTO TYPES*/
-message CommitteeProto
+message AllCommitteeApprovalProto
 {
 	string Id = 1;
 	string Name = 2;
 	int32 CommitteeTime = 3;
-	string ProjectName = 4;
-	bool HasLegalDocument = 5;
-	string WorkRule = 6;
-	string LegalDocument = 7;
-	string Missions = 8;
-	int32 CommitteesStatus = 9;
-	string Location = 10;
-	string Position = 11;
-	string GroupNotes = 12;
-	string CreatedOn = 13;
+	int32 CommitteesStatus = 4;
+	string CreatedOn = 5;
+	string Description = 6;
+	string Missions = 7;
 }
 
-/*
-        public string Name { get; set; }
-		public CommitteeTime CommitteeTime { get; set; }
-		public string ProjectName { get; set; }
-		public bool HasLegalDocument { get; set; }
-		public string WorkRule { get; set; }
-		public string? LegalDocument { get; set; }
-		public string Missions { get; set; }
-        public CommitteesStatus CommitteesStatus { get; set; }
-        public string Location { get; set; }
-		public string Position { get; set; }
-        public string? GroupNotes { get; set; }
-        public virtual ICollection<Meeting> Meetings { get; set; }
-        public virtual ICollection<CommitteeAttachment> Attachments { get; set; }
-		public virtual ICollection<WorkRule> WorkRules { get; set; }
-		public virtual ICollection<ExternalMember> ExternalMembers { get; set; }
-		public virtual ICollection<InternalMember> InternalMembers { get; set; }
-		public virtual ICollection<Proceeding> Proceedings { get; set; }
-        public virtual ICollection<Output> Outputs { get; set; }
-		public virtual ICollection<Target> Targets { get; set; }
-*/
+message CommitteeApprovalProtoById
+{
+	string Id = 1;
+	string Name = 2;
+	int32 CommitteeTime = 3;
+	bool HasLegalDocument = 4;
+	string WorkRule = 5;
+	string LegalDocument = 6;
+	string Missions = 7;
+	int32 CommitteesStatus = 8;
+	string CreatedOn = 9;
+	string Description = 10;
+	repeated string Attachments = 11;
+	repeated string ExternalMembers = 12; 
+	repeated string InternalMembers = 13; 
+}

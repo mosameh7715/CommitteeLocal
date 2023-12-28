@@ -2,6 +2,6 @@
 {
 	public class GetCommitteeApprovalByIdQuery : IRequest<ResponseDTO>
 	{
-        public Guid SubKnowledgeId { get; set; }
+        public Guid CommitteeId { get; set; }
     }
 }

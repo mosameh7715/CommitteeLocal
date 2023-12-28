@@ -24,7 +24,7 @@
 				SearchTerm = request.SearchTerm
 			});
 
-			var responseMapped = _mapper.Map<List<CommitteeProto>>(allCommittees.Result);
+			var responseMapped = _mapper.Map<List<AllCommitteeApprovalProto>>(allCommittees.Result);
 
 			var response = new ResponseAllCommitteeApprovals();
 
@@ -33,6 +33,19 @@
 			response.TotalPages = allCommittees.TotalPages;
 			response.TotalItems = allCommittees.TotalItems;
 			response.PageSize = allCommittees.PageSize;
+
+			return await Task.FromResult(response);
+		}
+
+		public async override Task<ResponseCommitteeApprovalById> GetCommitteeApprovalById(RequestCommitteeApprovalById request,ServerCallContext context)
+		{
+			var committee = await _mediator.Send(new GetCommitteeApprovalByIdQuery { CommitteeId = Guid.TryParse(request.CommitteeId,out Guid parsedId) ? parsedId : default(Guid) });
+
+			var responseMapped = _mapper.Map<CommitteeApprovalProtoById>(committee.Result);
+
+			var response = new ResponseCommitteeApprovalById();
+
+			response.Committee = responseMapped;
 
 			return await Task.FromResult(response);
 		}

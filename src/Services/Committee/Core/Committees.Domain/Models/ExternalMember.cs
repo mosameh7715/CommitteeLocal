@@ -11,7 +11,7 @@
 		public Permission Permission { get; set; }
 		public Guid CommitteeId { get; set; }
 		public Committee Committee { get; set; }
-        public ICollection<Proceeding> Proceedings { get; set; }
+        public ICollection<ExternalMemberProceeding> ExternalMemberProceedings { get; set; }
 		public ICollection<Meeting> Meetings { get; set; }
 	}
 }

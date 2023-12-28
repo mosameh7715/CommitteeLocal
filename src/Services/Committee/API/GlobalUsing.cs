@@ -38,3 +38,5 @@ global using Committees.Application.Features.MeetingsFeatures.Command.Post;
 global using Committees.Application.Features.OutputFeatures.Command.Post;
 global using Committees.Application.Features.ProceedingFeatures.Command.Post;
 global using Committees.Application.Features.CommitteeFeatures.Command.UpdateCommitteesStatus;
+global using Committees.Application.Features.CommitteeFeatures.Command.Put;
+global using Committees.Application.Services;

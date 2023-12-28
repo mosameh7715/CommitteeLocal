@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Committees.API.Protos";
+
+//GET ALL Committee
+message RequestAllMeetingAttachments
+{
+	string MeetingId = 1; 
+}
+
+message ResponseAllMeetingAttachments
+{
+	repeated AllMeetingAttachmentProto MeetingAttachment = 1;
+}
+
+
+/*PROTO TYPES*/
+message AllMeetingAttachmentProto
+{
+	string Id = 1;
+	string Path = 2;
+	string CreatedOn = 3;
+	string CreatedBy = 4;
+}

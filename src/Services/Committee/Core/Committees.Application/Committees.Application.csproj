@@ -9,6 +9,12 @@
   <ItemGroup>
     <None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" />
     <None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" />
+    <None Remove="Protos\Committees\CommitteeProtoMessages.proto" />
+    <None Remove="Protos\Committees\CommitteeProtoService.proto" />
+    <None Remove="Protos\Meetings\MeetingProtoMessages.proto" />
+    <None Remove="Protos\Meetings\MeetingProtoService.proto" />
+    <None Remove="Protos\Outputs\OutputProtoMessages.proto" />
+    <None Remove="Protos\Outputs\OutputProtoService.proto" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.1.0" />
@@ -41,6 +47,7 @@
   <ItemGroup>
     <Folder Include="Protos\" />
     <Folder Include="Services\" />
+    <Folder Include="Validation\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +58,12 @@
   <ItemGroup>
     <Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" GrpcServices="None" />
     <Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\Committees\CommitteeProtoMessages.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\Committees\CommitteeProtoService.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\Meetings\MeetingProtoMessages.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\Meetings\MeetingProtoService.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\Outputs\OutputProtoMessages.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\Outputs\OutputProtoService.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

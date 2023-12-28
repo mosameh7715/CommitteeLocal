@@ -1,0 +1,74 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Committees.API.Protos";
+
+//GET ALL Committee
+message RequestAllCommittees
+{
+	int32 PageIndex = 1;
+	int32 PageSize = 2;
+	string SearchTerm = 3;
+}
+
+message ResponseAllCommittees
+{
+	repeated AllCommitteeProto Committee = 1;
+	int32 PageIndex = 2;
+	int32 TotalPages = 3;
+	int32 TotalItems = 4;
+	int32 PageSize = 5;
+}
+
+//GET Committee BY ID 
+message RequestCommitteeById 
+{
+	string CommitteeId = 1;
+}
+
+message ResponseCommitteeById
+{
+	CommitteeByIdProto Committee = 1;
+}
+
+
+//GET CONTROLLER AND ACTION NAMES
+message GetCommitteeControllerAndActionNameResponse{
+	repeated CommitteeModuleInfo ModuleInfo =1;
+}
+
+message CommitteeModuleInfo {
+	string MethodVerd =1;
+    string Path =2;
+    string ControllerName =3;
+    string ActionName =4;
+    int64 key =5;
+}
+
+/*PROTO TYPES*/
+message AllCommitteeProto
+{
+	string Id = 1;
+	string Name = 2;
+	int32 CommitteesStatus = 4;
+	string CreatedOn = 5;
+	string Description = 6;
+	repeated string ExternalMembers = 7; 
+	repeated string InternalMembers = 8; 
+}
+
+message CommitteeByIdProto
+{
+	string Id = 1;
+	string Name = 2;
+	int32 CommitteeTime = 3;
+	bool HasLegalDocument = 4;
+	string WorkRule = 5;
+	string LegalDocument = 6;
+	string Missions = 7;
+	int32 CommitteesStatus = 8;
+	string CreatedOn = 9;
+	string Description = 10;
+	repeated string Attachments = 11;
+	repeated string ExternalMembers = 12; 
+	repeated string InternalMembers = 13; 
+}

@@ -7,4 +7,5 @@ import "Protos/CommitteeApprovals/CommitteeApprovalProtoMessages.proto";
 
 service CommitteeApprovalProtoService {
 	rpc GetAllCommitteeApprovals (RequestAllCommitteeApprovals) returns (ResponseAllCommitteeApprovals);
+	rpc GetCommitteeApprovalById (RequestCommitteeApprovalById) returns (ResponseCommitteeApprovalById);
 }

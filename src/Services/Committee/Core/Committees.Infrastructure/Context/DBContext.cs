@@ -22,6 +22,9 @@
 		public DbSet<WorkRule> WorkRules { get; set; }
 		public DbSet<InternalMemberMeeting> InternalMemberMeetings { get; set; }
 		public DbSet<InternalMemberProceeding> InternalMemberProceedings { get; set; }
+		public DbSet<CommitteeInternalMember> CommitteeInternalMembers { get; set; }
+		public DbSet<ExternalMemberProceeding> ExternalMemberProceeding { get; set; }
+
 
 
 		public bool AllMigrationsApplied()

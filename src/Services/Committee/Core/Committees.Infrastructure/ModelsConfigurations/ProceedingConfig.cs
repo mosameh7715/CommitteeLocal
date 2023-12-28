@@ -11,10 +11,6 @@
 			builder.HasMany(a => a.InternalMemberProceedings)
 					.WithOne(a => a.Proceeding)
 					.HasForeignKey(a => a.ProceedingId);
-
-			builder.HasMany(c => c.ExternalMembers)
-					.WithMany(m => m.Proceedings)
-					.UsingEntity(j => j.ToTable("ExternalMemberProceedings"));
 		}
 	}
 }

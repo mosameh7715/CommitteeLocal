@@ -6,5 +6,6 @@
 		public InternalMember InternalMember { get; set; }
 		public Guid ProceedingId { get; set; }
 		public Proceeding Proceeding { get; set; }
-	}
+        public bool IsAttend { get; set; }
+    }
 }
