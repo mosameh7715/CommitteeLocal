@@ -35,21 +35,14 @@ global using Committees.Models;
 global using Microsoft.EntityFrameworkCore;
 global using Committees.Infrastructure.Extention.IQueryable;
 global using Committees.Application.Features.CommitteeFeatures.Command.Put;
-
-
-
-
-
-
-
-
-
-
-
-
-global using Domain.Enums;
+global using Committees.Application.Features.CommitteeFeatures.Queries.GetById;
+global using Committees.Application.Features.CommitteeFeatures.Queries.GetCommitteeTimeTable;
+global using Committees.Application.Features.MeetingsFeatures.Command.Post;
 global using Committees.Application.Features.CommitteeApprovals.Query.GetAll;
-global using Committees.Models;
-global using Committees.Infrastructure.GenericRepo;
 global using Committees.API.Protos;
 global using Microsoft.AspNetCore.Authorization;
+global using Committees.Application.Validation.MeetingsValidations;
+global using Committees.Application.Features.ProceedingFeatures.Command.Post;
+global using Committees.Application.Validation.ProceedingValidation;
+global using Committees.Application.Features.OutputFeatures.Command.Post;
+
