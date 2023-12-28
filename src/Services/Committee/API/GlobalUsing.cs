@@ -32,5 +32,4 @@ global using Committees.Application.Features.OutputTypes.Query.GetAll;
 global using Committees.Application.Features.CommitteeFeatures.Command.Delete;
 global using Committees.Application.Features.CommitteeFeatures.Command.Post;
 global using Committees.Application.Features.CommitteeFeatures.Command.Put;
-global using Committees.Application.Features.OutputTypes.Query.GetAll;
 global using Committees.Application.Services;

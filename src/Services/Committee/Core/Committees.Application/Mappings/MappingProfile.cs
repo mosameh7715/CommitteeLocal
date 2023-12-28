@@ -1,8 +1,4 @@
-﻿using Committees.Application.Features.CommitteeFeatures.Command.Put;
-
-using Committees.Application.Features.Committees.Queries.GetAllInternalMembers;
-
-namespace Committees.Application.Mappings
+﻿namespace Committees.Application.Mappings
 {
 	public class MappingProfile : Profile
 	{
@@ -26,7 +22,7 @@ namespace Committees.Application.Mappings
 				.ForMember(dest => dest.ExternalMembers, opt => opt.Ignore())
 				.ForMember(dest => dest.Targets, opt => opt.Ignore())
 				.ForMember(dest => dest.Meetings, opt => opt.Ignore())
-				.ForMember(dest => dest.InternalMembers, opt => opt.Ignore())
+				//.ForMember(dest => dest.InternalMembers, opt => opt.Ignore())
 				.ForMember(dest => dest.Proceedings, opt => opt.Ignore())
 				.ForMember(dest => dest.Outputs, opt => opt.Ignore())
 				.ForMember(dest => dest.CommitteesStatus, opt => opt.MapFrom(src => CommitteesStatus.Pending));
@@ -57,7 +53,7 @@ namespace Committees.Application.Mappings
 				.ForMember(dest => dest.ExternalMembers, opt => opt.Ignore())
 				.ForMember(dest => dest.Targets, opt => opt.Ignore())
 				.ForMember(dest => dest.Meetings, opt => opt.Ignore())
-				.ForMember(dest => dest.InternalMembers, opt => opt.Ignore())
+				//.ForMember(dest => dest.InternalMembers, opt => opt.Ignore())
 				.ForMember(dest => dest.Proceedings, opt => opt.Ignore())
 				.ForMember(dest => dest.Outputs, opt => opt.Ignore())
 				.ForMember(dest => dest.CommitteesStatus, opt => opt.MapFrom(src => CommitteesStatus.Pending));
@@ -80,8 +76,6 @@ namespace Committees.Application.Mappings
 
             #endregion
 
-            #region CommitteeApprovals
-            CreateMap<Committee, AllCommitteeApprovalDto>();
             // OutputType
             CreateMap<PostOutputTypeCommand, OutputType>();
             CreateMap<PutOutputTypeCommand, OutputType>();
@@ -161,7 +155,7 @@ namespace Committees.Application.Mappings
 				.ForMember(des => des.PermissionNameEn,opt => opt.MapFrom(src => src.Permission.NameEn));
 			#endregion
 
-			#region IxternalMembers
+			#region InternalMembers
 			CreateMap<InternalMember,AllInternalMembersDto>()
 				.ForMember(des => des.PermissionNameAr,opt => opt.MapFrom(src => src.Permission.NameAr))
 				.ForMember(des => des.PermissionNameEn,opt => opt.MapFrom(src => src.Permission.NameEn));
@@ -169,16 +163,4 @@ namespace Committees.Application.Mappings
 		}
 	}
 }
-            CreateMap<AllCommitteeApprovalDto, CommitteeProto>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToString()))
-                .ForMember(dest => dest.Missions, opt => opt.MapFrom(src => src.Missions ?? ""))
-                .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn.ToString() ?? ""))
-                .ForMember(dest => dest.CommitteeTime, opt => opt.MapFrom(src => src.CommitteeTime))
-                .ForMember(dest => dest.CommitteesStatus, opt => opt.MapFrom(src => src.CommitteesStatus));
-            #endregion
-        }
 
-
-    }
-}
