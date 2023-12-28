@@ -18,7 +18,7 @@
 		}
 		public async Task<ResponseDTO> Handle(GetAllCommitteeApprovalsQuery request,CancellationToken cancellationToken)
 		{
-			var allCommittes = _committeeRepo.GetAll(request.PageIndex,request.PageSize,ref _responseDTO).ToList();
+			var allCommittes = _committeeRepo.GetAll(request.PageIndex,request.PageSize,ref _responseDTO).OrderBy(x => x.CreatedOn).ToList();
 
 			string searchTerm = request.SearchTerm ?? string.Empty;
 

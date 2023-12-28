@@ -20,9 +20,6 @@
 					.WithOne(a => a.Committee)
 					.HasForeignKey(a => a.CommitteeId);
 
-			builder.HasMany(c => c.InternalMembers)
-					.WithMany(m => m.Committees)
-					.UsingEntity(j => j.ToTable("CommitteeInternalMembers"));
 
 			builder.HasMany(a => a.Proceedings)
 					.WithOne(a => a.Committee)

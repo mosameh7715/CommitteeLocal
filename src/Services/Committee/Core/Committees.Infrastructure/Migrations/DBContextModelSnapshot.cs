@@ -22,21 +22,6 @@ namespace Committees.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CommitteeInternalMember", b =>
-                {
-                    b.Property<Guid>("CommitteesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("InternalMembersUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CommitteesId", "InternalMembersUserId");
-
-                    b.HasIndex("InternalMembersUserId");
-
-                    b.ToTable("CommitteeInternalMember");
-                });
-
             modelBuilder.Entity("Committees.Domain.Models.CommitteeAttachment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -53,6 +38,7 @@ namespace Committees.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -74,7 +60,94 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("CommitteeId");
 
-                    b.ToTable("CommitteeAttachments");
+                    b.ToTable("CommitteeAttachments", (string)null);
+                });
+
+            modelBuilder.Entity("Committees.Domain.Models.CommitteeInternalMember", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommitteeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("InternalMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommitteeId");
+
+                    b.HasIndex("InternalMemberId");
+
+                    b.ToTable("CommitteeInternalMembers", (string)null);
+                });
+
+            modelBuilder.Entity("Committees.Domain.Models.ExternalMemberProceeding", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ExternalMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsAttend")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProceedingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExternalMemberId");
+
+                    b.HasIndex("ProceedingId");
+
+                    b.ToTable("ExternalMemberProceeding", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.InternalMember", b =>
@@ -114,7 +187,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("InternalMembers");
+                    b.ToTable("InternalMembers", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.InternalMemberMeeting", b =>
@@ -156,7 +229,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("MeetingId");
 
-                    b.ToTable("InternalMemberMeetings");
+                    b.ToTable("InternalMemberMeetings", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.InternalMemberProceeding", b =>
@@ -173,6 +246,9 @@ namespace Committees.Infrastructure.Migrations
 
                     b.Property<Guid>("InternalMemberId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsAttend")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("ProceedingId")
                         .HasColumnType("uniqueidentifier");
@@ -198,7 +274,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("ProceedingId");
 
-                    b.ToTable("InternalMemberProceedings");
+                    b.ToTable("InternalMemberProceedings", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.Output", b =>
@@ -248,7 +324,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("OutputTypeId");
 
-                    b.ToTable("Outputs");
+                    b.ToTable("Outputs", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.OutputAttachment", b =>
@@ -267,6 +343,7 @@ namespace Committees.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -288,7 +365,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("OutputId");
 
-                    b.ToTable("OutputAttachments");
+                    b.ToTable("OutputAttachments", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.OutputType", b =>
@@ -336,7 +413,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutputTypes");
+                    b.ToTable("OutputTypes", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.Permission", b =>
@@ -384,7 +461,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("Permissions", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.Target", b =>
@@ -425,7 +502,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("CommitteeId");
 
-                    b.ToTable("Targets");
+                    b.ToTable("Targets", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.WorkRule", b =>
@@ -444,6 +521,7 @@ namespace Committees.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -465,7 +543,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("CommitteeId");
 
-                    b.ToTable("WorkRules");
+                    b.ToTable("WorkRules", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Models.Committee", b =>
@@ -540,7 +618,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Committees");
+                    b.ToTable("Committees", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Models.ExternalMember", b =>
@@ -602,7 +680,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("ExternalMembers");
+                    b.ToTable("ExternalMembers", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Models.Meeting", b =>
@@ -656,7 +734,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("CommitteeId");
 
-                    b.ToTable("Meetings");
+                    b.ToTable("Meetings", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Models.MeetingAttachment", b =>
@@ -675,6 +753,7 @@ namespace Committees.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -696,7 +775,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("MeetingId");
 
-                    b.ToTable("MeetingAttachments");
+                    b.ToTable("MeetingAttachments", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Models.Proceeding", b =>
@@ -744,7 +823,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("CommitteeId");
 
-                    b.ToTable("Proceedings");
+                    b.ToTable("Proceedings", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Models.ProceedingAttachment", b =>
@@ -760,6 +839,7 @@ namespace Committees.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProceedingId")
@@ -784,7 +864,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("ProceedingId");
 
-                    b.ToTable("ProceedingAttachments");
+                    b.ToTable("ProceedingAttachments", (string)null);
                 });
 
             modelBuilder.Entity("ExternalMemberMeeting", b =>
@@ -799,22 +879,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("MeetingsId");
 
-                    b.ToTable("ExternalMemberMeeting");
-                });
-
-            modelBuilder.Entity("ExternalMemberProceeding", b =>
-                {
-                    b.Property<Guid>("ExternalMembersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProceedingsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ExternalMembersId", "ProceedingsId");
-
-                    b.HasIndex("ProceedingsId");
-
-                    b.ToTable("ExternalMemberProceeding");
+                    b.ToTable("ExternalMemberMeeting", (string)null);
                 });
 
             modelBuilder.Entity("MeetingOutput", b =>
@@ -829,7 +894,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("OutputsId");
 
-                    b.ToTable("MeetingOutput");
+                    b.ToTable("MeetingOutput", (string)null);
                 });
 
             modelBuilder.Entity("MeetingProceeding", b =>
@@ -844,22 +909,7 @@ namespace Committees.Infrastructure.Migrations
 
                     b.HasIndex("ProceedingsId");
 
-                    b.ToTable("MeetingProceeding");
-                });
-
-            modelBuilder.Entity("CommitteeInternalMember", b =>
-                {
-                    b.HasOne("Committees.Models.Committee", null)
-                        .WithMany()
-                        .HasForeignKey("CommitteesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Committees.Domain.Models.InternalMember", null)
-                        .WithMany()
-                        .HasForeignKey("InternalMembersUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("MeetingProceeding", (string)null);
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.CommitteeAttachment", b =>
@@ -871,6 +921,44 @@ namespace Committees.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Committee");
+                });
+
+            modelBuilder.Entity("Committees.Domain.Models.CommitteeInternalMember", b =>
+                {
+                    b.HasOne("Committees.Models.Committee", "Committee")
+                        .WithMany("CommitteeInternalMembers")
+                        .HasForeignKey("CommitteeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Committees.Domain.Models.InternalMember", "InternalMember")
+                        .WithMany("CommitteeInternalMembers")
+                        .HasForeignKey("InternalMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Committee");
+
+                    b.Navigation("InternalMember");
+                });
+
+            modelBuilder.Entity("Committees.Domain.Models.ExternalMemberProceeding", b =>
+                {
+                    b.HasOne("Committees.Models.ExternalMember", "ExternalMember")
+                        .WithMany("ExternalMemberProceedings")
+                        .HasForeignKey("ExternalMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Committees.Models.Proceeding", "Proceeding")
+                        .WithMany("ExternalMemberProceedings")
+                        .HasForeignKey("ProceedingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExternalMember");
+
+                    b.Navigation("Proceeding");
                 });
 
             modelBuilder.Entity("Committees.Domain.Models.InternalMember", b =>
@@ -1052,21 +1140,6 @@ namespace Committees.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ExternalMemberProceeding", b =>
-                {
-                    b.HasOne("Committees.Models.ExternalMember", null)
-                        .WithMany()
-                        .HasForeignKey("ExternalMembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Committees.Models.Proceeding", null)
-                        .WithMany()
-                        .HasForeignKey("ProceedingsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MeetingOutput", b =>
                 {
                     b.HasOne("Committees.Models.Meeting", null)
@@ -1099,6 +1172,8 @@ namespace Committees.Infrastructure.Migrations
 
             modelBuilder.Entity("Committees.Domain.Models.InternalMember", b =>
                 {
+                    b.Navigation("CommitteeInternalMembers");
+
                     b.Navigation("InternalMemberMeetings");
 
                     b.Navigation("InternalMemberProceedings");
@@ -1113,6 +1188,8 @@ namespace Committees.Infrastructure.Migrations
                 {
                     b.Navigation("Attachments");
 
+                    b.Navigation("CommitteeInternalMembers");
+
                     b.Navigation("ExternalMembers");
 
                     b.Navigation("Meetings");
@@ -1126,6 +1203,11 @@ namespace Committees.Infrastructure.Migrations
                     b.Navigation("WorkRules");
                 });
 
+            modelBuilder.Entity("Committees.Models.ExternalMember", b =>
+                {
+                    b.Navigation("ExternalMemberProceedings");
+                });
+
             modelBuilder.Entity("Committees.Models.Meeting", b =>
                 {
                     b.Navigation("InternalMemberMeetings");
@@ -1135,6 +1217,8 @@ namespace Committees.Infrastructure.Migrations
 
             modelBuilder.Entity("Committees.Models.Proceeding", b =>
                 {
+                    b.Navigation("ExternalMemberProceedings");
+
                     b.Navigation("InternalMemberProceedings");
 
                     b.Navigation("ProceedingAttachments");

@@ -18,7 +18,7 @@
         public virtual ICollection<CommitteeAttachment> Attachments { get; set; }
 		public virtual ICollection<WorkRule> WorkRules { get; set; }
 		public virtual ICollection<ExternalMember> ExternalMembers { get; set; }
-		public virtual ICollection<InternalMember> InternalMembers { get; set; }
+		public virtual ICollection<CommitteeInternalMember> CommitteeInternalMembers { get; set; }
 		public virtual ICollection<Proceeding> Proceedings { get; set; }
         public virtual ICollection<Output> Outputs { get; set; }
 		public virtual ICollection<Target> Targets { get; set; }

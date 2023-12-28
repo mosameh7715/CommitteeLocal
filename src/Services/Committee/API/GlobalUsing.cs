@@ -29,3 +29,4 @@ global using Committees.Application.Features.OutputTypes.Command.Delete;
 global using Committees.Application.Features.OutputTypes.Command.Post;
 global using Committees.Application.Features.OutputTypes.Command.Put;
 global using Committees.Application.Features.OutputTypes.Query.GetAll;
+global using Committees.Application.Services;

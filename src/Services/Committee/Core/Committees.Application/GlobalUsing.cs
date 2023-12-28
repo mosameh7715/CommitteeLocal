@@ -29,7 +29,12 @@ global using Committees.Application.Features.OutputTypes.Command.Post;
 global using Committees.Application.Validation.OutputValidation;
 global using Committees.Application.Features.OutputTypes.Command.Put;
 global using Committees.Application.Features.OutputTypes.Query.GetAll;
-
+global using Committees.Application.Features.CommitteeApprovals.Query.GetById;
+global using Microsoft.EntityFrameworkCore;
+global using Committees.Application.Features.Committees.Queries.GetAll;
+global using Committees.Application.Features.Meetings.Queries.GetAllMeetingAttachments;
+global using Committees.Application.Features.Outputs.Queries.GetAllOutputAttachments;
+global using Committees.Application.Features.Committees.Queries.GetAllExternalMembers;
 
 
 

@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Committees.API.Protos";
+
+import "google/protobuf/empty.proto";
+import "Protos/Outputs/OutputProtoMessages.proto";
+
+service OutputProtoService {
+	rpc GetAllOutputAttachments (RequestAllOutputAttachments) returns (ResponseAllOutputAttachments);
+}

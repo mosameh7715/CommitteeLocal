@@ -246,7 +246,7 @@
 			{
 				pageSize = 10;
 			}
-			var data = _dbContext.Set<T>().AsNoTracking()
+			var data = _dbContext.Set<T>().AsNoTracking().Where(x => x.State == State.NotDeleted)
                 .Where(where).AsQueryable();
             var items = data.Skip((pageNumber - 1) * pageSize).Take(pageSize).AsQueryable();
             var count = data.Count();

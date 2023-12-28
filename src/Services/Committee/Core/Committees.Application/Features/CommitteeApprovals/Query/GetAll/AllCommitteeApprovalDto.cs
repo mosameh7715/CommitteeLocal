@@ -4,6 +4,7 @@
 	{
         public Guid Id { get; set; }
         public string Name { get; set; }
+		public string Description { get; set; }
 		public CommitteeTime CommitteeTime { get; set; }
 		public string Missions { get; set; }
 		public DateTime CreatedOn { get; set; }

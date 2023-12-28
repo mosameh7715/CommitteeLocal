@@ -9,7 +9,7 @@
         public DateTime Date { get; set; }
         public virtual ICollection<ProceedingAttachment> ProceedingAttachments { get; set; }
         public virtual ICollection<Meeting> Meetings { get; set; }
-        public virtual ICollection<ExternalMember> ExternalMembers { get; set; }
+        public virtual ICollection<ExternalMemberProceeding> ExternalMemberProceedings { get; set; }
 		public virtual ICollection<InternalMemberProceeding> InternalMemberProceedings { get; set; }
 	}
 }
