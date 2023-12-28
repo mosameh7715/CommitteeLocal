@@ -1,4 +1,6 @@
-﻿namespace Committees.Application.Validation.CommitteeValidation
+﻿using Committees.Application.Features.Committees.Commands.Put;
+
+namespace Committees.Application.Validation.CommitteeValidation
 {
     public class PutCommitteeValidation : AbstractValidator<PutCommitteeDto>
     {

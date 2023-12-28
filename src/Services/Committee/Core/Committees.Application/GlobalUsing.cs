@@ -29,12 +29,11 @@ global using Committees.Application.Features.OutputTypes.Command.Post;
 global using Committees.Application.Validation.OutputValidation;
 global using Committees.Application.Features.OutputTypes.Command.Put;
 global using Committees.Application.Features.OutputTypes.Query.GetAll;
-global using Committees.Application.Features.CommitteeFeatures.Command.Post;
 global using Committees.Application.Validation.CommitteeValidation;
 global using Committees.Models;
 global using Microsoft.EntityFrameworkCore;
 global using Committees.Infrastructure.Extention.IQueryable;
-global using Committees.Application.Features.CommitteeFeatures.Command.Put;
+global using Committees.Application.Features.MeetingsFeatures.Command.Post;
 global using Committees.Application.Features.CommitteeApprovals.Query.GetById;
 global using Committees.Application.Features.Committees.Queries.GetAll;
 global using Committees.Application.Features.Meetings.Queries.GetAllMeetingAttachments;
@@ -44,3 +43,8 @@ global using Committees.Application.Features.Committees.Queries.GetAllInternalMe
 global using Committees.Application.Features.CommitteeApprovals.Query.GetAll;
 global using Committees.API.Protos;
 global using Microsoft.AspNetCore.Authorization;
+global using Committees.Application.Validation.MeetingsValidations;
+global using Committees.Application.Features.ProceedingFeatures.Command.Post;
+global using Committees.Application.Validation.ProceedingValidation;
+global using Committees.Application.Features.OutputFeatures.Command.Post;
+
