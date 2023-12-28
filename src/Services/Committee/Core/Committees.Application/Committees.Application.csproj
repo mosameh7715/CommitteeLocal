@@ -1,34 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<TargetFramework>net7.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" />
-    <None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" />
-    <None Remove="Protos\Committees\CommitteeProtoMessages.proto" />
-    <None Remove="Protos\Committees\CommitteeProtoService.proto" />
-    <None Remove="Protos\Meetings\MeetingProtoMessages.proto" />
-    <None Remove="Protos\Meetings\MeetingProtoService.proto" />
-    <None Remove="Protos\Outputs\OutputProtoMessages.proto" />
-    <None Remove="Protos\Outputs\OutputProtoService.proto" />
+	<None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" />
+	<None Remove="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" />
+	<None Remove="Protos\Committees\CommitteeProtoMessages.proto" />
+	<None Remove="Protos\Committees\CommitteeProtoService.proto" />
+	<None Remove="Protos\Meetings\MeetingProtoMessages.proto" />
+	<None Remove="Protos\Meetings\MeetingProtoService.proto" />
+	<None Remove="Protos\Outputs\OutputProtoMessages.proto" />
+	<None Remove="Protos\Outputs\OutputProtoService.proto" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="7.1.0" />
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="FluentValidation" Version="11.7.1" />
+	<PackageReference Include="Autofac" Version="7.1.0" />
+	<PackageReference Include="AutoMapper" Version="12.0.1" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	<PackageReference Include="FluentValidation" Version="11.7.1" />
 	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.57.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="MediatR" Version="12.1.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+	<PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+	<PackageReference Include="Grpc.Tools" Version="2.57.0">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="MediatR" Version="12.1.1" />
+	<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>		<ItemGroup>
 		<PackageReference Include="Autofac" Version="7.1.0" />
 		<PackageReference Include="AutoMapper" Version="12.0.1" />
@@ -45,25 +45,25 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Protos\" />
-    <Folder Include="Services\" />
-    <Folder Include="Validation\" />
+	<Folder Include="Protos\" />
+	<Folder Include="Services\" />
+	<Folder Include="Validation\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Committees.Domain\Committees.Domain.csproj" />
-    <ProjectReference Include="..\Committees.Infrastructure\Committees.Infrastructure.csproj" />
+	<ProjectReference Include="..\Committees.Domain\Committees.Domain.csproj" />
+	<ProjectReference Include="..\Committees.Infrastructure\Committees.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" GrpcServices="None" />
-    <Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\Committees\CommitteeProtoMessages.proto" GrpcServices="None" />
-    <Protobuf Include="Protos\Committees\CommitteeProtoService.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\Meetings\MeetingProtoMessages.proto" GrpcServices="None" />
-    <Protobuf Include="Protos\Meetings\MeetingProtoService.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\Outputs\OutputProtoMessages.proto" GrpcServices="None" />
-    <Protobuf Include="Protos\Outputs\OutputProtoService.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoMessages.proto" GrpcServices="None" />
+	<Protobuf Include="Protos\CommitteeApprovals\CommitteeApprovalProtoService.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\Committees\CommitteeProtoMessages.proto" GrpcServices="None" />
+	<Protobuf Include="Protos\Committees\CommitteeProtoService.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\Meetings\MeetingProtoMessages.proto" GrpcServices="None" />
+	<Protobuf Include="Protos\Meetings\MeetingProtoService.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\Outputs\OutputProtoMessages.proto" GrpcServices="None" />
+	<Protobuf Include="Protos\Outputs\OutputProtoService.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>
