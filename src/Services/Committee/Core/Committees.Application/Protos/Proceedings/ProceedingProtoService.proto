@@ -8,4 +8,5 @@ import "Protos/Proceedings/ProceedingProtoMessages.proto";
 service ProceedingProtoService {
 	rpc GetAllProceedingExternalMembers (RequestAllProceedingExternalMembers) returns (ResponseAllProceedingExternalMembers);
 	rpc GetAllProceedingInternalMembers (RequestAllProceedingInternalMembers) returns (ResponseAllProceedingInternalMembers);
+	rpc GetProceedingById (RequestGetProceedingById) returns (ResponseGetProceedingById);
 }

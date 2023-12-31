@@ -45,3 +45,24 @@ message ProceedingInternalMemberProto
 	string PermissionNameEn = 3;
 	bool IsAttend = 4;
 }
+
+message RequestGetProceedingById
+{
+	string ProceedingId = 1; 
+}
+
+message ResponseGetProceedingById 
+{
+	ProceedingByIdProto Proceeding = 1;
+}
+
+message ProceedingByIdProto
+{
+	string Id = 1;
+	string Name = 2;
+	string Notes = 3;
+	string CreatedOn = 4;
+	repeated string Attachments = 5;
+	repeated string ExternalMembers = 6; 
+	repeated string InternalMembers = 7; 
+}

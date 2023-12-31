@@ -46,5 +46,18 @@
 
 			return await Task.FromResult(response);
 		}
+
+		public async override Task<ResponseGetProceedingById> GetProceedingById(RequestGetProceedingById request,ServerCallContext context)
+		{
+			var proceeding = await _mediator.Send(new GetCommitteeApprovalByIdQuery { CommitteeId = Guid.TryParse(request.CommitteeId,out Guid parsedId) ? parsedId : default(Guid) });
+
+			var responseMapped = _mapper.Map<CommitteeApprovalProtoById>(proceeding.Result);
+
+			var response = new ResponseCommitteeApprovalById();
+
+			response.Committee = responseMapped;
+
+			return await Task.FromResult(response);
+		}
 	}
 }

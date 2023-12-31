@@ -46,3 +46,4 @@ global using Committees.API.Protos;
 global using Microsoft.AspNetCore.Authorization;
 global using Committees.Application.Features.Proceedings.GetAllExternalMembers;
 global using Committees.Application.Features.Proceedings.GetAllInternalMembers;
+global using Committees.Application.Features.Proceedings.GetById;
