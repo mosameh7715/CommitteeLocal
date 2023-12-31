@@ -105,6 +105,7 @@ try {
 	app.MapGrpcService<CommitteeService>();
 	app.MapGrpcService<MeetingService>();
 	app.MapGrpcService<OutputService>();
+	app.MapGrpcService<ProceedingService>();
 	app.UseMiddleware<GlobalExceptionHandler>();
 	// Configure the HTTP request pipeline.
 	if(app.Environment.IsDevelopment())

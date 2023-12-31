@@ -7,4 +7,6 @@ import "Protos/Committees/CommitteeProtoMessages.proto";
 
 service CommitteeProtoService {
 	rpc GetAllCommittee (RequestAllCommittees) returns (ResponseAllCommittees);
+	rpc GetAllCommitteeExternalMembers (RequestAllCommitteeExternalMembers) returns (ResponseAllCommitteeExternalMembers);
+	rpc GetAllCommitteeInternalMembers (RequestAllCommitteeInternalMembers) returns (ResponseAllCommitteeInternalMembers);
 }

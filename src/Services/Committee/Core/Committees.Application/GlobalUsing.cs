@@ -44,3 +44,5 @@ global using Committees.Application.Features.Committees.Queries.GetAllInternalMe
 global using Committees.Application.Features.CommitteeApprovals.Query.GetAll;
 global using Committees.API.Protos;
 global using Microsoft.AspNetCore.Authorization;
+global using Committees.Application.Features.Proceedings.GetAllExternalMembers;
+global using Committees.Application.Features.Proceedings.GetAllInternalMembers;

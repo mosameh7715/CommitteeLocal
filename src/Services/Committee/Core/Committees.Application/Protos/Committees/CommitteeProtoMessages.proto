@@ -72,3 +72,44 @@ message CommitteeByIdProto
 	repeated string ExternalMembers = 12; 
 	repeated string InternalMembers = 13; 
 }
+
+/*External members types */ 
+message RequestAllCommitteeExternalMembers
+{
+	string CommitteeId = 1; 
+}
+
+message ResponseAllCommitteeExternalMembers 
+{
+	repeated ExternalMemberProto ExternalMember = 1;
+}
+
+message ExternalMemberProto
+{
+	string Id = 1;
+    string Name = 2;
+	string PhoneNumber = 3;
+	string Job = 4;
+	string DestinationName = 5;
+	string Email = 6;
+	string PermissionNameAr = 7;
+	string PermissionNameEn = 8;
+}
+
+/*Internal members types */ 
+message RequestAllCommitteeInternalMembers
+{
+	string CommitteeId = 1; 
+}
+
+message ResponseAllCommitteeInternalMembers 
+{
+	repeated InternalMemberProto InternalMember = 1;
+}
+
+message InternalMemberProto
+{
+	string UserId = 1;
+	string PermissionNameAr = 2;
+	string PermissionNameEn = 3;
+}
