@@ -155,8 +155,6 @@
 			#endregion
 
 			#region CommitteeApprovals
-			CreateMap<Committee, AllCommitteeApprovalDto>();
-			#region CommitteeApprovals
 			CreateMap<Committee,AllCommitteeApprovalDto>()
 				.ForMember(des => des.CommitteeKeeperId,opt =>
 				{
@@ -333,4 +331,3 @@
 		}
 	}
 }
-
