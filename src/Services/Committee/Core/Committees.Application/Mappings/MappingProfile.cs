@@ -1,12 +1,4 @@
-﻿using Committees.Application.Features.Committees.Commands.Post;
-using Committees.Application.Features.Committees.Commands.Put;
-using Committees.Application.Features.Committees.Queries.GetById;
-using Committees.Application.Features.Committees.Queries.GetCommitteeTimeTable;
-using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;
-
-using Committees.Application.Features.Proceedings.GetById;
-
-namespace Committees.Application.Mappings
+﻿namespace Committees.Application.Mappings
 {
     public class MappingProfile : Profile
 	{
