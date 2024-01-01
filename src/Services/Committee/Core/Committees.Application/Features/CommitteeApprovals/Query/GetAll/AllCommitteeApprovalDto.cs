@@ -9,5 +9,8 @@
 		public string Missions { get; set; }
 		public DateTime CreatedOn { get; set; }
 		public CommitteesStatus CommitteesStatus { get; set; }
-	}
+		public Guid CommitteeKeeperId { get; set; }
+		public string CommitteeKeeperName { get; set; }
+        public int MemberCount { get; set; }
+    }
 }

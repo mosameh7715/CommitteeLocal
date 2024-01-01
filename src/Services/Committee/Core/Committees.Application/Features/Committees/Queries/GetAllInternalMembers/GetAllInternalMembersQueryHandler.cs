@@ -25,6 +25,7 @@ namespace Committees.Application.Features.Committees.Queries.GetAllInternalMembe
 		{
 			var committee = _committeeRepo.GetAll(x => x.Id == request.CommitteeId).FirstOrDefault();
 
+
 			if(committee == null)
 			{
 				return _responseHelper.NotFound("committeeIsNotFound");
@@ -34,7 +35,7 @@ namespace Committees.Application.Features.Committees.Queries.GetAllInternalMembe
 
 			var internalMembers = _inMembersRepo.GetAll(x => internalMemberIds.Contains(x.UserId)).Include(x => x.Permission).ToList(); 
 
-			var internalMembersMapped = _mapper.Map<List<AllExternalMembersDto>>(internalMembers);
+			var internalMembersMapped = _mapper.Map<List<AllInternalMembersDto>>(internalMembers);
 
 
 			return _responseHelper.RetrievedSuccessfully(internalMembersMapped,"internalMembersIsRetrievedSuccessfully");

@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Committees.API.Protos";
+
+import "google/protobuf/empty.proto";
+import "Protos/Proceedings/ProceedingProtoMessages.proto";
+
+service ProceedingProtoService {
+	rpc GetAllProceedingExternalMembers (RequestAllProceedingExternalMembers) returns (ResponseAllProceedingExternalMembers);
+	rpc GetAllProceedingInternalMembers (RequestAllProceedingInternalMembers) returns (ResponseAllProceedingInternalMembers);
+	rpc GetProceedingById (RequestGetProceedingById) returns (ResponseGetProceedingById);
+}

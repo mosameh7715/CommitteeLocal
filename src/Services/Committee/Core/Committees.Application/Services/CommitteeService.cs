@@ -36,5 +36,37 @@
 
 			return await Task.FromResult(response);
 		}
+
+		public async override Task<ResponseAllCommitteeExternalMembers> GetAllCommitteeExternalMembers(RequestAllCommitteeExternalMembers request,ServerCallContext context)
+		{
+			var allExternalMembers = await _mediator.Send(new GetAllExternalMembersQuery
+			{
+				CommitteeId = Guid.TryParse(request.CommitteeId,out Guid parsedId) ? parsedId : default(Guid)
+			});
+
+			var responseMapped = _mapper.Map<List<ExternalMemberProto>>(allExternalMembers.Result);
+
+			var response = new ResponseAllCommitteeExternalMembers();
+
+			response.ExternalMember.AddRange(responseMapped);
+
+			return await Task.FromResult(response);
+		}
+
+		public async override Task<ResponseAllCommitteeInternalMembers> GetAllCommitteeInternalMembers(RequestAllCommitteeInternalMembers request,ServerCallContext context)
+		{
+			var allInternalMembers = await _mediator.Send(new GetAllInternalMembersQuery
+			{
+				CommitteeId = Guid.TryParse(request.CommitteeId,out Guid parsedId) ? parsedId : default(Guid)
+			});
+
+			var responseMapped = _mapper.Map<List<InternalMemberProto>>(allInternalMembers.Result);
+
+			var response = new ResponseAllCommitteeInternalMembers();
+
+			response.InternalMember.AddRange(responseMapped);
+
+			return await Task.FromResult(response);
+		}
 	}
 }

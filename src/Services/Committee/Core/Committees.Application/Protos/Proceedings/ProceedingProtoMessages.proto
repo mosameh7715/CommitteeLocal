@@ -1,0 +1,68 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Committees.API.Protos";
+
+
+/*External members types */ 
+message RequestAllProceedingExternalMembers
+{
+	string ProceedingId = 1; 
+}
+
+message ResponseAllProceedingExternalMembers 
+{
+	repeated ProceedingExternalMemberProto ExternalMember = 1;
+}
+
+message ProceedingExternalMemberProto
+{
+	string Id = 1;
+    string Name = 2;
+	string PhoneNumber = 3;
+	string Job = 4;
+	string DestinationName = 5;
+	string Email = 6;
+	string PermissionNameAr = 7;
+	string PermissionNameEn = 8;
+	bool IsAttend = 9;
+}
+
+/*Internal members types */ 
+message RequestAllProceedingInternalMembers
+{
+	string ProceedingId = 1; 
+}
+
+message ResponseAllProceedingInternalMembers 
+{
+	repeated ProceedingInternalMemberProto InternalMember = 1;
+}
+
+message ProceedingInternalMemberProto
+{
+	string UserId = 1;
+	string PermissionNameAr = 2;
+	string PermissionNameEn = 3;
+	bool IsAttend = 4;
+}
+
+message RequestGetProceedingById
+{
+	string ProceedingId = 1; 
+}
+
+message ResponseGetProceedingById 
+{
+	ProceedingByIdProto Proceeding = 1;
+}
+
+message ProceedingByIdProto
+{
+	string Id = 1;
+	string Name = 2;
+	string Notes = 3;
+	string CreatedOn = 4;
+	repeated string Attachments = 5;
+	repeated string ExternalMembers = 6; 
+	repeated string InternalMembers = 7; 
+}

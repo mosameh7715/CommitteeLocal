@@ -47,4 +47,11 @@ global using Committees.Application.Validation.MeetingsValidations;
 global using Committees.Application.Features.ProceedingFeatures.Command.Post;
 global using Committees.Application.Validation.ProceedingValidation;
 global using Committees.Application.Features.OutputFeatures.Command.Post;
-
+global using Committees.Application.Features.Proceedings.GetAllExternalMembers;
+global using Committees.Application.Features.Proceedings.GetAllInternalMembers;
+global using Committees.Application.Features.Proceedings.GetById;
+global using Committees.Application.Features.Committees.Commands.Post;
+global using Committees.Application.Features.Committees.Commands.Put;
+global using Committees.Application.Features.Committees.Queries.GetById;
+global using Committees.Application.Features.Committees.Queries.GetCommitteeTimeTable;
+global using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;

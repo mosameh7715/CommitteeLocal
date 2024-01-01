@@ -1,10 +1,4 @@
-﻿using Committees.Application.Features.Committees.Commands.Post;
-using Committees.Application.Features.Committees.Commands.Put;
-using Committees.Application.Features.Committees.Queries.GetById;
-using Committees.Application.Features.Committees.Queries.GetCommitteeTimeTable;
-using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;
-
-namespace Committees.Application.Mappings
+﻿namespace Committees.Application.Mappings
 {
     public class MappingProfile : Profile
 	{
@@ -162,6 +156,40 @@ namespace Committees.Application.Mappings
 
 			#region CommitteeApprovals
 			CreateMap<Committee, AllCommitteeApprovalDto>();
+			#region CommitteeApprovals
+			CreateMap<Committee,AllCommitteeApprovalDto>()
+				.ForMember(des => des.CommitteeKeeperId,opt =>
+				{
+					opt.MapFrom(src =>
+						(src.CommitteeInternalMembers
+							.Where(i => i.InternalMember.Permission.NameAr.Contains("امين اللجنة") || i.InternalMember.Permission.NameEn.Contains("Committee Keeper"))
+							.Select(i => i.InternalMemberId)
+							.FirstOrDefault()) != default(Guid)
+							? src.CommitteeInternalMembers
+								.Where(i => i.InternalMember.Permission.NameAr.Contains("امين اللجنة") || i.InternalMember.Permission.NameEn.Contains("Committee Keeper"))
+								.Select(i => i.InternalMemberId)
+								.FirstOrDefault()
+							: (src.ExternalMembers
+								.Where(e => e.Permission.NameAr.Contains("امين اللجنة") || e.Permission.NameEn.Contains("Committee Keeper"))
+								.Select(e => e.Id)
+								.FirstOrDefault()) != default(Guid)
+								? src.ExternalMembers
+									.Where(e => e.Permission.NameAr.Contains("امين اللجنة") || e.Permission.NameEn.Contains("Committee Keeper"))
+									.Select(e => e.Id)
+									.FirstOrDefault()
+								: default(Guid)
+					);
+				})
+				.ForMember(des => des.CommitteeKeeperName,opt =>
+				{
+					opt.MapFrom(src =>
+						src.ExternalMembers
+							.Where(e => e.Permission.NameAr.Contains("امين اللجنة") || e.Permission.NameEn.Contains("Committee Keeper"))
+							.Select(e => e.Name)
+							.FirstOrDefault() ?? string.Empty
+					);
+				})
+				.ForMember(des => des.MemberCount,opt => opt.MapFrom(src => src.CommitteeInternalMembers.Count() + src.ExternalMembers.Count()));
 
 			CreateMap<AllCommitteeApprovalDto,AllCommitteeApprovalProto>()
 				.ForMember(dest => dest.Id,opt => opt.MapFrom(src => src.Id.ToString()))
@@ -170,7 +198,10 @@ namespace Committees.Application.Mappings
 				.ForMember(dest => dest.Missions,opt => opt.MapFrom(src => src.Missions ?? ""))
 				.ForMember(dest => dest.CreatedOn,opt => opt.MapFrom(src => src.CreatedOn.ToString() ?? ""))
 				.ForMember(dest => dest.CommitteeTime,opt => opt.MapFrom(src => src.CommitteeTime))
-				.ForMember(dest => dest.CommitteesStatus,opt => opt.MapFrom(src => src.CommitteesStatus));
+				.ForMember(dest => dest.CommitteeKeeperId,opt => opt.MapFrom(src => src.CommitteeKeeperId.ToString()))
+				.ForMember(dest => dest.CommitteeKeeperName,opt => opt.MapFrom(src => src.CommitteeKeeperName ?? ""))
+				.ForMember(dest => dest.CommitteesStatus,opt => opt.MapFrom(src => src.CommitteesStatus))
+				.ForMember(dest => dest.MemberCount,opt => opt.MapFrom(src => src.MemberCount));
 
 			CreateMap<Committee,CommitteeApprovalByIdDto>()
 				.ForMember(des => des.ExternalMembers,opt => opt.MapFrom(src => src.ExternalMembers.Select(x => x.Id)))
@@ -232,12 +263,72 @@ namespace Committees.Application.Mappings
 			CreateMap<ExternalMember,AllExternalMembersDto>()
 				.ForMember(des => des.PermissionNameAr,opt => opt.MapFrom(src => src.Permission.NameAr))
 				.ForMember(des => des.PermissionNameEn,opt => opt.MapFrom(src => src.Permission.NameEn));
+
+			CreateMap<AllExternalMembersDto,ExternalMemberProto>()
+				.ForMember(dest => dest.Id,opt => opt.MapFrom(src => src.Id.ToString()))
+				.ForMember(dest => dest.Name,opt => opt.MapFrom(src => src.Name ?? ""))
+				.ForMember(dest => dest.DestinationName,opt => opt.MapFrom(src => src.DestinationName ?? ""))
+				.ForMember(dest => dest.Email,opt => opt.MapFrom(src => src.Email ?? ""))
+				.ForMember(dest => dest.Job,opt => opt.MapFrom(src => src.Job ?? ""))
+				.ForMember(dest => dest.PermissionNameAr,opt => opt.MapFrom(src => src.PermissionNameAr ?? ""))
+				.ForMember(dest => dest.PermissionNameEn,opt => opt.MapFrom(src => src.PermissionNameEn ?? ""))
+				.ForMember(dest => dest.PhoneNumber,opt => opt.MapFrom(src => src.PhoneNumber ?? ""));
 			#endregion
 
 			#region InternalMembers
 			CreateMap<InternalMember,AllInternalMembersDto>()
 				.ForMember(des => des.PermissionNameAr,opt => opt.MapFrom(src => src.Permission.NameAr))
 				.ForMember(des => des.PermissionNameEn,opt => opt.MapFrom(src => src.Permission.NameEn));
+
+			CreateMap<AllInternalMembersDto,InternalMemberProto>()
+				.ForMember(dest => dest.UserId,opt => opt.MapFrom(src => src.UserId.ToString()))
+				.ForMember(dest => dest.PermissionNameAr,opt => opt.MapFrom(src => src.PermissionNameAr ?? ""))
+				.ForMember(dest => dest.PermissionNameEn,opt => opt.MapFrom(src => src.PermissionNameEn ?? ""));
+			#endregion
+
+			#region ProceedingExternalMembers
+			CreateMap<ExternalMember,AllProceedingExternalMembersDto>()
+				.ForMember(des => des.PermissionNameAr,opt => opt.MapFrom(src => src.Permission.NameAr))
+				.ForMember(des => des.PermissionNameEn,opt => opt.MapFrom(src => src.Permission.NameEn));
+
+			CreateMap<AllProceedingExternalMembersDto,ProceedingExternalMemberProto> ()
+				.ForMember(dest => dest.Id,opt => opt.MapFrom(src => src.Id.ToString()))
+				.ForMember(dest => dest.Name,opt => opt.MapFrom(src => src.Name ?? ""))
+				.ForMember(dest => dest.DestinationName,opt => opt.MapFrom(src => src.DestinationName ?? ""))
+				.ForMember(dest => dest.Email,opt => opt.MapFrom(src => src.Email ?? ""))
+				.ForMember(dest => dest.Job,opt => opt.MapFrom(src => src.Job ?? ""))
+				.ForMember(dest => dest.PermissionNameAr,opt => opt.MapFrom(src => src.PermissionNameAr ?? ""))
+				.ForMember(dest => dest.PermissionNameEn,opt => opt.MapFrom(src => src.PermissionNameEn ?? ""))
+				.ForMember(dest => dest.PhoneNumber,opt => opt.MapFrom(src => src.PhoneNumber ?? ""))
+				.ForMember(dest => dest.IsAttend,opt => opt.MapFrom(src => src.IsAttend));
+			#endregion
+
+			#region ProceedingInternalMembers
+			CreateMap<InternalMember,AllProceedingInternalMembersDto>()
+				.ForMember(des => des.PermissionNameAr,opt => opt.MapFrom(src => src.Permission.NameAr))
+				.ForMember(des => des.PermissionNameEn,opt => opt.MapFrom(src => src.Permission.NameEn));
+
+			CreateMap<AllProceedingInternalMembersDto,ProceedingInternalMemberProto>()
+				.ForMember(dest => dest.UserId,opt => opt.MapFrom(src => src.UserId.ToString()))
+				.ForMember(dest => dest.PermissionNameAr,opt => opt.MapFrom(src => src.PermissionNameAr ?? ""))
+				.ForMember(dest => dest.IsAttend,opt => opt.MapFrom(src => src.IsAttend))
+				.ForMember(dest => dest.PermissionNameEn,opt => opt.MapFrom(src => src.PermissionNameEn ?? ""));
+			#endregion
+
+			#region Proceeding
+			CreateMap<Proceeding,GetProceedingByIdDto>()
+					.ForMember(des => des.ExternalMembers,opt => opt.MapFrom(src => src.ExternalMemberProceedings.Select(x => x.ExternalMemberId)))
+					.ForMember(des => des.InternalMembers,opt => opt.MapFrom(src => src.InternalMemberProceedings.Select(x => x.InternalMemberId)))
+					.ForMember(des => des.Attachments,opt => opt.MapFrom(src => src.ProceedingAttachments.Select(x => x.Path)));
+
+			CreateMap<GetProceedingByIdDto,ProceedingByIdProto>()
+					.ForMember(des => des.Name,opt => opt.MapFrom(src => src.Name ?? ""))
+					.ForMember(des => des.Notes,opt => opt.MapFrom(src => src.Notes ?? ""))
+					.ForMember(des => des.Id,opt => opt.MapFrom(src => src.Id.ToString()))
+					.ForMember(des => des.CreatedOn,opt => opt.MapFrom(src => src.CreatedOn.ToString() ?? ""))
+					.ForMember(des => des.Attachments,opt => opt.MapFrom(src => src.Attachments.Select(x => x ?? "")))
+					.ForMember(des => des.ExternalMembers,opt => opt.MapFrom(src => src.ExternalMembers.Select(x => x.ToString() ?? "")))
+					.ForMember(des => des.InternalMembers,opt => opt.MapFrom(src => src.InternalMembers.Select(x => x.ToString() ?? "")));
 			#endregion
 		}
 	}

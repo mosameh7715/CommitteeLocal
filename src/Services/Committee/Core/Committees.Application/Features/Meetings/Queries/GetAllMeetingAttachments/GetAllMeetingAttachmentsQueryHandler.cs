@@ -19,7 +19,8 @@
 		}
 		public async Task<ResponseDTO> Handle(GetAllMeetingAttachmentsQuery request,CancellationToken cancellationToken)
 		{
-			var meeting = _meetingRepo.GetAll(x => x.Id == request.MeetingId).FirstOrDefault();
+			var meeting = _meetingRepo.GetAll(x => x.Id == request.MeetingId)
+				.Include(x => x.MeetingAttachments.Where(x => x.State == State.NotDeleted)).FirstOrDefault();
 
             if (meeting == null)
             {

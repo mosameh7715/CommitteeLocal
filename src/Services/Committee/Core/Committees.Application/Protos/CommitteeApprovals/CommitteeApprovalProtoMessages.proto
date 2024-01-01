@@ -40,6 +40,9 @@ message AllCommitteeApprovalProto
 	string CreatedOn = 5;
 	string Description = 6;
 	string Missions = 7;
+	string committeeKeeperId = 8;
+	string committeeKeeperName = 9;
+	int32 MemberCount = 10; 
 }
 
 message CommitteeApprovalProtoById
