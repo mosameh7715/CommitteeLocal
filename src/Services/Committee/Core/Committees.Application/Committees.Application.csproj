@@ -45,6 +45,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+	<Folder Include="Mappings\" />
 	<Folder Include="Protos\" />
 	<Folder Include="Services\" />
 	<Folder Include="Validation\" />

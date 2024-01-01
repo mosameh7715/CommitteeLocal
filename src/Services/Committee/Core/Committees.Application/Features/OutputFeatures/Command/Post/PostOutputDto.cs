@@ -6,6 +6,7 @@
         public Guid OutputTypeId { get; set; }
         public string Details { get; set; }
         public List<IFormFile> OutputAttachments { get; set; }
-        public List<Guid> MeetingIds { get; set; }
+        public Guid CommitteeId { get; set; }
+        public Guid MeetingId { get; set; }
     }
 }

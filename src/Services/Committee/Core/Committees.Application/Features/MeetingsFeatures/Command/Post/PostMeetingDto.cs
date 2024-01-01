@@ -7,6 +7,7 @@
         public MeetingStatus MeetingStatus { get; set; }
         public bool HasExpertAssist { get; set; }
         public DateTime MeetingDate { get; set; }
+        public Guid CommitteeId { get; set; }
         public List<IFormFile> MeetingAttachments { get; set; }
     }
 }

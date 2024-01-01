@@ -53,6 +53,7 @@
             }
 
             var newCommittee = _mapper.Map<Committee>(request.CommitteeDto);
+            newCommittee.CreatedBy = _loggedInUserId;
             _committeeRepo.Add(newCommittee);
 
             if (request.CommitteeDto.HasLegalDocument)

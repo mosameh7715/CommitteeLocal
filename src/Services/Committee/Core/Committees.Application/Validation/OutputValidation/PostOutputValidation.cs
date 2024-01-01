@@ -17,7 +17,7 @@
                 .Must(files => files == null || files.All(file => IsValidFile(file)))
                 .WithMessage("All output attachments must be valid files.");
 
-            RuleFor(output => output.MeetingIds)
+            RuleFor(output => output.MeetingId)
                 .NotEmpty().WithMessage("At least one meeting must be associated with the output.");
         }
 

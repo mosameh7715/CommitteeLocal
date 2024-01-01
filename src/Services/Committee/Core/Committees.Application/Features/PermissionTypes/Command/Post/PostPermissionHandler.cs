@@ -8,6 +8,7 @@
         private readonly ResponseDTO _responseDto;
         private readonly IResponseHelper _responseHelper;
         private readonly ILogger<PostPermissionHandler> _logger;
+        public Guid _loggedInUserId;
 
         public PostPermissionHandler
         (
@@ -15,7 +16,8 @@
             IGRepository<Permission> permissionRepository,
             IMapper mapper,
             IResponseHelper responseHelper,
-            ILogger<PostPermissionHandler> logger
+            ILogger<PostPermissionHandler> logger,
+            IHttpContextAccessor _httpContextAccessor
         )
         {
             _unitOfWork = unitOfWork;
@@ -24,6 +26,7 @@
             _responseDto = new ResponseDTO();
             _responseHelper = responseHelper;
             _logger = logger;
+            _loggedInUserId = Infrastructure.Helpers.LoggedInUserProvider.GetLoggedInUserId(_httpContextAccessor);
         }
 
         public async Task<ResponseDTO> Handle(PostPermissionCommand request, CancellationToken cancellationToken)
@@ -40,6 +43,7 @@
             }
 
             var permissionToAdd = _mapper.Map<Permission>(request);
+            permissionToAdd.CreatedBy = _loggedInUserId;
             _permissionRepository.Add(permissionToAdd);
             _unitOfWork.SaveChanges();
             _unitOfWork.Commit();

@@ -2,7 +2,6 @@
 {
     public class PostMeetingCommand : IRequest<ResponseDTO>
     {
-        public Guid CommitteeId { get; set; }
         public PostMeetingDto MeetingDto { get; set; }
     }
 }

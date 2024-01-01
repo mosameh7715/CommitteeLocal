@@ -17,7 +17,7 @@
                 .Must(files => files == null || files.All(file => IsValidFile(file)))
                 .WithMessage("All proceeding attachments must be valid files.");
 
-            RuleFor(proceeding => proceeding.MeetingIds)
+            RuleFor(proceeding => proceeding.MeetingId)
                 .NotEmpty().WithMessage("At least one meeting must be associated with the proceeding.");
         }
 

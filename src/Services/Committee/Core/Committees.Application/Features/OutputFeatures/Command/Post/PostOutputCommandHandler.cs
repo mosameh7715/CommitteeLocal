@@ -46,7 +46,7 @@
             }
 
             var outputToAdd = _mapper.Map<Output>(request.OutputDto);
-            outputToAdd.CommitteeId = request.CommitteeId;
+            outputToAdd.CreatedBy = _loggedInUserId;
 
             _outputRepo.Add(outputToAdd);
 
@@ -65,14 +65,6 @@
                     })
                 );
                 _outputAttachmentRepo.AddRange(outputAttachments);
-            }
-
-            // Associate with Meetings
-            if (request.OutputDto.MeetingIds != null && request.OutputDto.MeetingIds.Any())
-            {
-                outputToAdd.Meetings = request.OutputDto.MeetingIds
-                    .Select(meetingId => new Meeting { Id = meetingId })
-                    .ToList();
             }
 
             _unitOfWork.SaveChanges();

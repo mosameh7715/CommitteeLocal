@@ -46,7 +46,7 @@
             }
 
             var meetingToAdd = _mapper.Map<Meeting>(request.MeetingDto);
-            meetingToAdd.CommitteeId = request.CommitteeId;
+            meetingToAdd.CreatedBy = _loggedInUserId;
 
             _meetingRepo.Add(meetingToAdd);
 
@@ -64,6 +64,7 @@
                         };
                     })
                 );
+
                 _meetingAttachmentRepo.AddRange(meetingAttachments);
             }
 
