@@ -1,4 +1,4 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.Post
+﻿namespace Committees.Application.Features.Committees.Commands.Post
 {
     public class TargetDto
     {

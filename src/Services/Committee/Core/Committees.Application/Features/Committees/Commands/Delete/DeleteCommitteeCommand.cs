@@ -1,4 +1,4 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.Delete
+﻿namespace Committees.Application.Features.Committees.Commands.Delete
 {
     public class DeleteCommitteeCommand : IRequest<ResponseDTO>
     {

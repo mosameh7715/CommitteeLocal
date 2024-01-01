@@ -1,22 +1,32 @@
-﻿using Committees.Application.Features.Proceedings.GetById;
+﻿using Committees.Application.Features.Committees.Commands.Post;
+using Committees.Application.Features.Committees.Commands.Put;
+using Committees.Application.Features.Committees.Queries.GetById;
+using Committees.Application.Features.Committees.Queries.GetCommitteeTimeTable;
+using Committees.Application.Features.ProceedingFeatures.Command.PostProceedingMembers;
+
+using Committees.Application.Features.Proceedings.GetById;
 
 namespace Committees.Application.Mappings
 {
-	public class MappingProfile : Profile
+    public class MappingProfile : Profile
 	{
 		public MappingProfile()
 		{
-			// Permission
-			CreateMap<PostPermissionCommand, Permission>();
+            #region Permission
+            // Permission
+            CreateMap<PostPermissionCommand, Permission>();
 			CreateMap<PutPermissionCommand, Permission>();
 			CreateMap<Permission, AllPermissionsDTO>();
+            #endregion
 
-			// OutputType
-			CreateMap<PostOutputTypeCommand, OutputType>();
+            #region OutputType
+            // OutputType
+            CreateMap<PostOutputTypeCommand, OutputType>();
 			CreateMap<PutOutputTypeCommand, OutputType>();
-			CreateMap<OutputType, AllOutputTypesDTO>();
+			CreateMap<OutputType, AllOutputTypesDTO>(); 
+			#endregion
 
-			#region PostCommitteeMapping..
+			#region PostCommitteeMapping
 			// Committee
 			CreateMap<PostCommitteeDto, Committee>()
 				.ForMember(dest => dest.Attachments, opt => opt.Ignore())
@@ -76,12 +86,65 @@ namespace Committees.Application.Mappings
 			CreateMap<PutCommitteeDto, TargetDto>()
 				.ForMember(dest => dest.CommitteeId, opt => opt.Ignore());
 
+			#endregion
+
+			#region CommitteeDetails
+			// CommitteeDetailsDTO
+			CreateMap<Committee, CommitteeDetailsDTO>()
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.CommitteeTime, opt => opt.MapFrom(src => src.CommitteeTime))
+				.ForMember(dest => dest.ProjectName, opt => opt.MapFrom(src => src.ProjectName))
+				.ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+				.ForMember(dest => dest.HasLegalDocument, opt => opt.MapFrom(src => src.HasLegalDocument))
+				.ForMember(dest => dest.WorkRule, opt => opt.MapFrom(src => src.WorkRule))
+				.ForMember(dest => dest.LegalDocument, opt => opt.MapFrom(src => src.LegalDocument))
+				.ForMember(dest => dest.Missions, opt => opt.MapFrom(src => src.Missions))
+				.ForMember(dest => dest.CommitteesStatus, opt => opt.MapFrom(src => src.CommitteesStatus))
+				.ForMember(dest => dest.Location, opt => opt.MapFrom(src => src.Location))
+				.ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position))
+				.ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn))
+				.ForMember(dest => dest.Attachments, opt => opt.MapFrom(src => src.Attachments.Select(a => a.Path).ToList()))
+				.ForMember(dest => dest.WorkRules, opt => opt.MapFrom(src => src.WorkRules.Select(w => w.Path).ToList()))
+				.ForMember(dest => dest.Targets, opt => opt.MapFrom(src => src.Targets));
+
+			// CommitteeDetailsDTO - ExternalMember
+			CreateMap<ExternalMember, ExternalMemberDto>()
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
+				.ForMember(dest => dest.Job, opt => opt.MapFrom(src => src.Job))
+				.ForMember(dest => dest.DestinationName, opt => opt.MapFrom(src => src.DestinationName))
+				.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+				.ForMember(dest => dest.PermissionId, opt => opt.MapFrom(src => src.PermissionId));
+
+			// CommitteeDetailsDTO - Target
+			CreateMap<Target, TargetDto>()
+				.ForMember(dest => dest.Goal, opt => opt.MapFrom(src => src.Goal));
+
+			// CommitteeDetailsDTO
+			CreateMap<Committee, CommitteeDetailsDTO>()
+				.ForMember(dest => dest.Targets, opt => opt.MapFrom(src => src.Targets.Select(t => t.Goal).ToList()));
             #endregion
 
-            // OutputType
-            CreateMap<PostOutputTypeCommand, OutputType>();
-            CreateMap<PutOutputTypeCommand, OutputType>();
-            CreateMap<OutputType, AllOutputTypesDTO>();
+            #region CommitteeMettings
+            // Committee - Mettings
+            CreateMap<Meeting, MeetingDTO>()
+				.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+				.ForMember(dest => dest.Rules, opt => opt.MapFrom(src => src.Rules))
+				.ForMember(dest => dest.MeetingDate, opt => opt.MapFrom(src => src.MeetingDate))
+				.ForMember(dest => dest.CommitteeId, opt => opt.MapFrom(src => src.CommitteeId));
+
+            // Meetings
+            CreateMap<PostMeetingDto, Meeting>();
+            CreateMap<PostMeetingDto, MeetingAttachment>()
+                .ForMember(dest => dest.Path, opt => opt.MapFrom(src => src.MeetingAttachments));
+            #endregion
+
+            #region PostProceedingMembersMapping
+
+            CreateMap<PostProceedingMembersDto, PostProceedingMembersCommand>()
+                .ForMember(dest => dest.ProceedingId, opt => opt.Ignore());
+
+            #endregion
 
 			#region CommitteeApprovals
 			CreateMap<Committee,AllCommitteeApprovalDto>()

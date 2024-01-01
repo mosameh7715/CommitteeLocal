@@ -1,6 +1,6 @@
-﻿namespace Committees.Application.Features.CommitteeFeatures.Command.Put
+﻿namespace Committees.Application.Features.Committees.Commands.Post
 {
-    public class PutCommitteeDto
+    public class PostCommitteeDto
     {
         public string Name { get; set; }
         public CommitteeTime CommitteeTime { get; set; }
