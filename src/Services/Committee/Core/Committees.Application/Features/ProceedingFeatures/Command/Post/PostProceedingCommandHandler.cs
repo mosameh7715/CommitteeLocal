@@ -66,14 +66,6 @@
                 _proceedingAttachmentRepo.AddRange(proceedingAttachments);
             }
 
-            // Associate with Meetings
-            if (request.ProceedingDto.MeetingIds != null && request.ProceedingDto.MeetingIds.Any())
-            {
-                proceedingToAdd.Meetings = request.ProceedingDto.MeetingIds
-                    .Select(meetingId => new Meeting { Id = meetingId })
-                    .ToList();
-            }
-
             _unitOfWork.SaveChanges();
             _unitOfWork.Commit();
 

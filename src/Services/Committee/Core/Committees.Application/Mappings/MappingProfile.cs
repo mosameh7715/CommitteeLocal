@@ -136,7 +136,23 @@
             CreateMap<PostProceedingMembersDto, PostProceedingMembersCommand>()
                 .ForMember(dest => dest.ProceedingId, opt => opt.Ignore());
 
-            #endregion
+			#endregion
+
+			#region Meeting - Proceeding - Outputs
+			CreateMap<IFormFile, MeetingAttachment>()
+					.ForMember(dest => dest.Path, opt => opt.MapFrom(src => src.FileName));
+
+			CreateMap<PostProceedingDto, Proceeding>()
+				.ForMember(dest => dest.Meetings, opt => opt.Ignore())
+				.ForMember(dest => dest.ProceedingAttachments, opt => opt.Ignore());
+			CreateMap<PostMeetingDto, Meeting>();
+
+
+			CreateMap<PostOutputDto, Output>()
+				.ForMember(dest => dest.Meetings, opt => opt.Ignore())
+				.ForMember(dest => dest.OutputAttachments, opt => opt.Ignore());
+			CreateMap<PostMeetingDto, Meeting>(); 
+			#endregion
 
 			#region CommitteeApprovals
 			CreateMap<Committee,AllCommitteeApprovalDto>()
@@ -315,4 +331,3 @@
 		}
 	}
 }
-
