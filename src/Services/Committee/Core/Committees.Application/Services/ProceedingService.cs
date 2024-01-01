@@ -49,13 +49,13 @@
 
 		public async override Task<ResponseGetProceedingById> GetProceedingById(RequestGetProceedingById request,ServerCallContext context)
 		{
-			var proceeding = await _mediator.Send(new GetCommitteeApprovalByIdQuery { CommitteeId = Guid.TryParse(request.CommitteeId,out Guid parsedId) ? parsedId : default(Guid) });
+			var proceeding = await _mediator.Send(new GetProceedingByIdQuery { ProceedingId = Guid.TryParse(request.ProceedingId,out Guid parsedId) ? parsedId : default(Guid) });
 
-			var responseMapped = _mapper.Map<CommitteeApprovalProtoById>(proceeding.Result);
+			var responseMapped = _mapper.Map<ProceedingByIdProto>(proceeding.Result);
 
-			var response = new ResponseCommitteeApprovalById();
+			var response = new ResponseGetProceedingById();
 
-			response.Committee = responseMapped;
+			response.Proceeding = responseMapped;
 
 			return await Task.FromResult(response);
 		}
